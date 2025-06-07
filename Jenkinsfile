@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'docker-compose build'
+                bat 'docker-compose down && docker-compose up -d'
             }
         }
         stage('Deploy') {
             steps {
-                bat 'docker-compose up -d'
+                bat 'docker-compose down && docker-compose up -d'
             }
         }
     }
