@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 WORKDIR /app
-COPY requirements.txt .
+COPY ./servicio1/requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
-COPY . .
+COPY ./servicio1 /app
 CMD ["python", "app.py"]
