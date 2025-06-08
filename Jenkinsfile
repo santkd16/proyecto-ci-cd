@@ -13,8 +13,8 @@ pipeline {
         }
         stage('Build y Deploy') {
             steps {
-                sh 'docker-compose build'
-                sh 'docker-compose up -d'
+                pat 'docker-compose build'
+                pat 'docker-compose up -d'
             }
         }
     }
