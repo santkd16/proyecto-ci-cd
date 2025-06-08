@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   servicio1:
-    image: <USER>/servicio1:latest # Usarás la imagen build/pusheada por CI
+    build: ./servicio1
     ports:
       - "5002:5000"
     networks:
       - app-network
 
   servicio2:
-    image: <USER>/servicio2:latest # Usarás la imagen build/pusheada por CI
+    build: ./servicio2
     ports:
       - "5001:5000"
     networks:
