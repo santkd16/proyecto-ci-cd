@@ -1,19 +1,23 @@
 pipeline {
     agent any
     stages {
-        stage('Clonar servicios') {
+        stage('Clonar servicio1') {
             steps {
-                dir('servicio1') {
-                    git url: 'https://github.com/santkd16/servicio1.git', branch: 'main'
-                }
-                dir('servicio2') {
-                    git url: 'https://github.com/santkd16/servicio2.git', branch: 'main'
-                }
+                sh 'git clone https://github.com/santkd16/servicio1.git'
             }
         }
-        stage('Build y Deploy') {
+        stage('Clonar servicio2') {
+            steps {
+                sh 'git clone https://github.com/santkd16/servicio2.git'
+            }
+        }
+        stage('Build') {
             steps {
                 sh 'docker-compose build'
+            }
+        }
+        stage('Deploy') {
+            steps {
                 sh 'docker-compose up -d'
             }
         }
