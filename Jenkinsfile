@@ -1,30 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Clonar Repositorios') {
+        stage('Clonar servicios') {
             steps {
-                // Clona servicio1
-                git branch: 'main', url: 'https://github.com/<org>/servicio1-repo.git', changelog: false, poll: false
-                sh 'mv . ../servicio1'
-                // Clona servicio2
-                dir('..') {
-                    git branch: 'main', url: 'https://github.com/<org>/servicio2-repo.git', changelog: false, poll: false
-                    sh 'mv . ../servicio2'
+                dir('servicio1') {
+                    git url: 'https://github.com/santkd16/servicio1.git', branch: 'main'
                 }
-            }
-        }
-        stage('Copiar docker-compose') {
-            steps {
-                // Copia el docker-compose.yml del repo de infraestructura al workspace raíz
-                sh 'cp docker-compose.yml ../'
+                dir('servicio2') {
+                    git url: 'https://github.com/santkd16/servicio2.git', branch: 'main'
+                }
             }
         }
         stage('Build y Deploy') {
             steps {
-                dir('..') {
-                    sh 'docker-compose build'
-                    sh 'docker-compose up -d'
-                }
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
             }
         }
     }
